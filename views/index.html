@@ -1,0 +1,61 @@
+<!doctype html>
+<html  ng-app="sapUI">
+<head>
+
+<script src="../../javascripts/angular.js"></script>
+<script src="../../javascripts/jquery.js"></script>
+<script src="../../javascripts/bootstrap.js"></script>
+<script src="../../modules/sapUI.js"></script>
+<script src="../../modules/sapUIController.js"></script>
+<script src="../../modules/sapUIService.js"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/font-awesome.css">
+
+</head>
+<Script></Script>
+<Body ng-controller="sapUIController">
+
+<div class="jumbotron">
+<img src="../images/sapientnitro_logo.png" class="img-responsive col-sm-8" style="height:100px; width:300px; float:left">
+<h2 style="color:grey; padding:20px;"> Cart<sup class="sup">- an eCom Hub!</sup></h2>
+</div>
+<div class="loader col-sm-offset-6" ng-show="showLoader"></div>
+<div class="input-group stylish-input-group col-sm-6 col-sm-offset-3" ng-hide="showLoader">
+    <input type="text" ng-model="search.tags" class="form-control glyphicon glyphicon-search"  placeholder="Search by tag" >
+    <span class="input-group-addon">
+    	<button type="submit">
+    		<i class="fa fa-search"></i>
+        </button>  
+    </span>
+</div>
+<div class="row">
+<div ng-repeat="deal in dataFromAPI | filter:search:strict"> 
+
+  <div class="col-sm-6 card">
+    <div class="card card-block box">
+    	<img ng-src="{{deal.image}}" class="img-responsive pull-xs-left itemImage  img-thumbnail" style="vertical-align: middle;" />  
+   		<div class="">
+   			<h3 class="card-title">{{deal.name}}</h3>
+   			<p> Purchased by: {{deal.purchased_by}}</p>
+   			<i class="fa fa-inr"></i> Price {{deal.price | number }}  | Rating:{{deal.rating}}
+   			
+   			<p class="card-text"><i class="fa fa-tag"></i>{{cngTagString(deal.tags);}}</p>
+   			
+   			<i class="fa fa-external-link col-sm-offset-2"></i>Link:    <a href="#" ng-click="openUrl(deal.link)" class="limitChar">{{deal.link}}</a>
+
+   			<div class="pull-right"><p ng-show="{{deal.like}}">Likes:{{deal.like}}</p></div>
+   			
+   			
+   		</div> 	
+
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+</Body>
+</html>
